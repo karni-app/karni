@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> كرني (Karni) | رفيقك الذكي لإدارة الراتب والمصاريف والديون</title>
+  <meta name="description" content="حمّل تطبيق كرني لإدارة الراتب الشهري والمصاريف والديون والأقساط وأهداف الادخار. فترة تجريبية مجانية 24 ساعة لكل المزايا، متوفر لأغلب دول العالم." />
+  <link rel="icon" type="image/png" href="assets/karni_icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root,
+    [data-theme="dark"] {
+      --primary: #10b981;
+      --primary-bright: #10b981;
+      --primary-dark: #044e54;
+      --gradient-brand: linear-gradient(135deg, #10b981 0%, #059669 45%, #044e54 100%);
+      --bg-page: #091314;
+      --bg-card: #102022;
+      --bg-subtle: #152b2e;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: #1e3a3d;
+      --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.25);
+      --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.35);
+      --shadow-lg: 0 20px 45px rgba(0, 0, 0, 0.5);
+      --radius-lg: 22px;
+      --radius-md: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      color-scheme: dark;
+    }
+
+    body {
+      font-family: 'Readex Pro', sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      background: rgba(16, 32, 34, 0.88);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 74px;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .brand img {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+      object-fit: cover;
+    }
+
+    .brand-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-bright);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-cta {
+      background: var(--gradient-brand);
+      color: #fff;
+      text-decoration: none;
+      padding: 9px 18px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 6px 16px rgba(5, 150, 105, 0.28);
+      transition: transform 0.2s;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 64px 0 56px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 2.95rem);
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 span {
+      background: var(--gradient-brand);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.08rem;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+      max-width: 580px;
+    }
+
+    .hero-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-btn-primary {
+      background: var(--gradient-brand);
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 26px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 10px 24px rgba(5, 150, 105, 0.32);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px rgba(5, 150, 105, 0.42);
+    }
+
+    .hero-btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      text-decoration: none;
+      padding: 14px 24px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: transform 0.2s, border-color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-btn-secondary:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary-bright);
+    }
+
+    /* Store & APK Download Section */
+    .download-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 28px;
+      padding: 32px 28px;
+      box-shadow: var(--shadow-lg);
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .download-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .store-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .store-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      text-decoration: none;
+      border: 1px solid var(--border-color);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      text-align: right;
+      font-family: 'Readex Pro', sans-serif;
+    }
+
+    .store-btn.apk-btn {
+      background: var(--gradient-brand);
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 10px 22px rgba(5, 150, 105, 0.32);
+    }
+
+    .store-btn.apk-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px rgba(5, 150, 105, 0.42);
+    }
+
+    .store-btn.coming-soon {
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      opacity: 0.9;
+    }
+
+    .store-btn.coming-soon:hover {
+      transform: translateY(-2px);
+    }
+
+    .soon-tag {
+      position: absolute;
+      top: -9px;
+      left: 12px;
+      background: #f59e0b;
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 999px;
+      box-shadow: 0 3px 8px rgba(245, 158, 11, 0.35);
+    }
+
+    .store-icon {
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+    }
+
+    .store-text small {
+      display: block;
+      font-size: 0.74rem;
+      opacity: 0.85;
+      line-height: 1.25;
+    }
+
+    .store-text strong {
+      display: block;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    /* Hero Logo Card */
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-showcase {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 32px;
+      padding: 32px;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      position: relative;
+      max-width: 380px;
+      width: 100%;
+    }
+
+    .logo-showcase img {
+      width: 185px;
+      height: 185px;
+      border-radius: 38px;
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.45);
+      margin-bottom: 18px;
+      transition: transform 0.35s ease;
+    }
+
+    .logo-showcase:hover img {
+      transform: scale(1.04) rotate(-1.5deg);
+    }
+
+    .logo-showcase h3 {
+      font-size: 1.35rem;
+      margin-bottom: 6px;
+    }
+
+    .logo-showcase p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .trial-banner-mini {
+      background: var(--bg-subtle);
+      border: 1px dashed var(--primary-bright);
+      color: var(--primary);
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    /* Section Headers */
+    .section {
+      padding: 64px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 44px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.6rem, 3vw, 2.25rem);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1.02rem;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 22px;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 15px;
+      background: var(--bg-subtle);
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      font-size: 1.55rem;
+      margin-bottom: 16px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.14rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      font-size: 0.93rem;
+      color: var(--text-muted);
+    }
+
+    /* Screenshots Gallery (Phone Frame) */
+    .gallery-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 28px;
+      padding: 36px 24px;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+
+    .slide-meta {
+      max-width: 540px;
+      margin: 0 auto 18px;
+    }
+
+    .slide-counter {
+      display: inline-block;
+      background: var(--bg-subtle);
+      color: var(--primary);
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .slide-title {
+      font-size: 1.18rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .slide-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .phone-stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .slider-arrow {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid var(--border-color);
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .slider-arrow:hover {
+      background: var(--primary);
+      color: #fff;
+      transform: scale(1.08);
+    }
+
+    .phone-frame {
+      width: 288px;
+      height: 615px;
+      background: #060d0e;
+      border-radius: 40px;
+      padding: 11px;
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.55);
+      border: 3px solid #1e3a3d;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phone-notch {
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 92px;
+      height: 20px;
+      background: #060d0e;
+      border-radius: 999px;
+      z-index: 5;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 30px;
+      overflow: hidden;
+      background: #000;
+      cursor: zoom-in;
+      position: relative;
+    }
+
+    .phone-screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.25s ease;
+    }
+
+    .thumbs-strip {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 10px 6px;
+      max-width: 880px;
+      margin: 0 auto;
+      scrollbar-width: thin;
+    }
+
+    .thumb-item {
+      width: 54px;
+      height: 114px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 2px solid transparent;
+      opacity: 0.55;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .thumb-item.active {
+      border-color: var(--primary-bright);
+      opacity: 1;
+      transform: translateY(-4px);
+      box-shadow: 0 6px 14px rgba(16, 185, 129, 0.3);
+    }
+
+    .thumb-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Pricing & Trial Section */
+    .trial-callout {
+      background: var(--gradient-brand);
+      color: #fff;
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .trial-callout h3 {
+      font-size: 1.4rem;
+      margin-bottom: 4px;
+    }
+
+    .trial-callout p {
+      opacity: 0.92;
+      font-size: 0.96rem;
+    }
+
+    .trial-badge-big {
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      padding: 12px 22px;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      backdrop-filter: blur(6px);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 26px;
+    }
+
+    .price-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .price-card.featured {
+      border-color: var(--primary-bright);
+      box-shadow: var(--shadow-md);
+    }
+
+    .price-region {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-subtle);
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      width: fit-content;
+    }
+
+    .price-amount {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .price-amount span {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .price-list {
+      list-style: none;
+      margin: 20px 0 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .price-list li {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .price-list li::before {
+      content: "✓";
+      color: var(--primary-bright);
+      font-weight: 700;
+    }
+
+    .plan-btn {
+      display: block;
+      text-align: center;
+      background: var(--gradient-brand);
+      color: #fff;
+      text-decoration: none;
+      padding: 13px 20px;
+      border-radius: 14px;
+      font-weight: 600;
+      transition: transform 0.2s;
+    }
+
+    .plan-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* WhatsApp Order Form */
+    .form-section-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 28px;
+      padding: 40px 32px;
+      box-shadow: var(--shadow-lg);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .form-group label .opt {
+      font-weight: 400;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 13px 15px;
+      border-radius: 13px;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-page);
+      color: var(--text-main);
+      font-family: 'Readex Pro', sans-serif;
+      font-size: 0.96rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--primary-bright);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.16);
+    }
+
+    .wa-submit-btn {
+      grid-column: 1 / -1;
+      background: #25d366;
+      color: #fff;
+      border: none;
+      padding: 16px 24px;
+      border-radius: 15px;
+      font-family: 'Readex Pro', sans-serif;
+      font-size: 1.06rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 12px 24px rgba(37, 211, 102, 0.3);
+      transition: transform 0.2s, background 0.2s;
+      margin-top: 6px;
+    }
+
+    .wa-submit-btn:hover {
+      background: #1ebe5d;
+      transform: translateY(-2px);
+    }
+
+    /* Lightbox Modal & Toast */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-height: 90vh;
+      max-width: 92vw;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      background: #044e54;
+      color: #fff;
+      padding: 14px 24px;
+      border-radius: 14px;
+      font-size: 0.94rem;
+      font-weight: 500;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      z-index: 1000;
+      transition: transform 0.3s ease;
+      text-align: center;
+      max-width: 90vw;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    footer {
+      text-align: center;
+      padding: 36px 20px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-btns {
+        justify-content: center;
+      }
+      .store-buttons {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="brand">
+        <img src="assets/karni_icon.png" alt="شعار  كرني" />
+        <div>
+          <span class="brand-title"> كرني</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#features">المميزات</a>
+        <a href="#screenshots">صور التطبيق</a>
+        <a href="#pricing">الاشتراك</a>
+        <a href="#download">التحميل</a>
+        <a href="#order-form">طلب التفعيل</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#download" class="nav-cta">حمّل التطبيق</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1>تحكّم في راتبك ومصاريفك بذكاء مع  <span>كرني</span></h1>
+        <p>
+          تطبيقك المالي المتكامل لتنظيم الراتب الشهري، حساب الصرف الآمن اليومي، تتبع المصاريف والالتزامات، جدولة الديون والسلف، وتحقيق أهداف الادخار بواجهة  سهلة وواضحة.
+        </p>
+
+        <div class="hero-btns">
+          <a href="#download" class="hero-btn-primary">📲 حمّل التطبيق الآن</a>
+          <a href="#order-form" class="hero-btn-secondary">⚡ طلب التفعيل</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="logo-showcase">
+          <img src="assets/karni_icon.png" alt="أيقونة  كرني" />
+          <h3> كرني — Karni</h3>
+          <p>دفترك المالي الرقمي لتنظيم الراتب، المصاريف، السلف والديون بكل بساطة وأمان.</p>
+          <div class="trial-banner-mini">
+            🎁 جرّب جميع المزايا مجاناً لمدة 24 ساعة فور التثبيت
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <h2>لماذا تختار  كرني؟</h2>
+        <p>مزايا عملية مصممة بعناية لتنظيم راتبك ومصاريفك اليومية، مع دعم كامل لأغلب دول العالم وعملاتها.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>حساب «الصرف الآمن اليومي»</h3>
+          <p>يحسب لك المبلغ الآمن للصرف يومياً بناءً على الأيام المتبقية في الشهر، مع حجز مبالغ التزاماتك الثابتة تلقائياً.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🧾</div>
+          <h3>تتبع المصاريف والمداخيل</h3>
+          <p>صنّف نفقاتك اليومية (ضروريات، فواتير، صحة، تعليم...) وحدّد مصدر الدفع سواء من الرصيد الحالي أو من الحصالة.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>إدارة الديون والسلف والأقساط</h3>
+          <p>تابع الديون التي عليك والسلف المستحقة لك والأقساط الشهرية مع شريط تقدم ونسبة السداد وتبويبات للنشطة والمنتهية.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>الحصالة والأهداف وحاسبة الزكاة</h3>
+          <p>اعزل مدخراتك لتحقيق أهدافك المالية، وخصّص زكاتك الشهرية أو المفتوحة بسجل منظم وحاسبة دائمة.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>إحصائيات دقيقة وأرشيف شهري + PDF</h3>
+          <p>رسوم بيانية لمسار الإنفاق وتوزيع الفئات، أرشفة تلقائية كل شهر، وتصدير كشف حساب PDF ونسخ احتياطي JSON.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🌍</div>
+          <h3>متوفر لأغلب دول العالم</h3>
+          <p>يدعم العملات المحلية لمختلف الدول العربية والعالمية و3 لغات (العربية، الفرنسية، الإنجليزية) مع قفل حماية PIN.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- App Screenshots Gallery -->
+  <section class="section" id="screenshots">
+    <div class="container">
+      <div class="section-header">
+        <h2>جولة داخل كرني</h2>
+        <p>استعرض 21 لقطة حقيقية من داخل تطبيق كرني (اضغط على شاشة الهاتف لتكبير الصورة).</p>
+      </div>
+
+      <div class="gallery-wrapper">
+        <div class="slide-meta">
+          <div class="slide-counter" id="slideCounter">صورة 1 من 21</div>
+          <div class="slide-title" id="slideTitle">الشاشة الرئيسية والصرف الآمن اليومي</div>
+          <div class="slide-desc" id="slideDesc">نظرة شاملة على الرصيد الحالي، المصاريف، الديون، السلف، مع حساب الصرف الآمن اليومي المقترح.</div>
+        </div>
+
+        <div class="phone-stage">
+          <button type="button" class="slider-arrow" id="prevSlide" aria-label="السابق">❮</button>
+
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen" id="phoneScreen">
+              <img id="activeScreenshot" src="assets/screenshots/1.jpg" alt="لقطة شاشة من تطبيق كرني" />
+            </div>
+          </div>
+
+          <button type="button" class="slider-arrow" id="nextSlide" aria-label="التالي">❯</button>
+        </div>
+
+        <div class="thumbs-strip" id="thumbsStrip"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trial & Pricing Section -->
+  <section class="section" id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <h2>الاشتراك </h2>
+      </div>
+
+      <div class="trial-callout">
+        <div>
+          <h3>🎁 فترة تجريبية مجانية لمدة 24 ساعة</h3>
+          <p>استمتع بجميع مميزات تطبيق كرني كاملةً مجاناً فور تثبيت التطبيق قبل تفعيل الاشتراك.</p>
+        </div>
+        <div class="trial-badge-big">24 ساعة مجاناً • كل المزايا</div>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Algeria Plan -->
+        <div class="price-card featured">
+          <div>
+            <div class="price-region">🇩🇿 داخل الجزائر</div>
+            <div class="price-amount">1000 <span>دج</span></div>
+            <p style="color: var(--text-muted); font-size: 0.92rem;">اشتراك كامل لتفعيل جميع مزايا التطبيق داخل الجزائر</p>
+            <ul class="price-list">
+              <li> الدفع مرة واحدة فقط و الاشتراك دائم</li>
+              <li>فتح جميع خصائص التطبيق بلا قيود</li>
+              <li>تواصل وتفعيل سريع عبر الواتساب</li>
+              <li>دعم فني متواصل وتحديثات مستمرة</li>
+              <li>حفظ آمن لبياناتك على هاتفك وتصدير كشوفات PDF</li>
+              <li>حفظ نسخة احتياطية على هاتفك في اي وقت يمكنك استعدتها</li>
+            </ul>
+          </div>
+          <a href="#order-form" class="plan-btn" onclick="selectCountryPreset('الجزائر')">اطلب التفعيل داخل الجزائر</a>
+        </div>
+
+        <!-- International Plan -->
+        <div class="price-card">
+          <div>
+            <div class="price-region">🌍 خارج الجزائر (جميع الدول)</div>
+            <div class="price-amount">$5 <span>دولار</span></div>
+            <p style="color: var(--text-muted); font-size: 0.92rem;">اشتراك موحّد للمستخدمين في الدول العربية والعالمية</p>
+            <ul class="price-list">
+              <li> الدفع مرة واحدة فقط و الاشتراك دائم</li>
+              <li>متاح لأغلب دول العالم مع دعم عملة بلدك</li>
+              <li>فتح جميع خصائص التطبيق بلا قيود</li>
+              <li>تواصل وتفعيل سريع عبر الواتساب</li>
+              <li>دعم فني متواصل وتحديثات مستمرة</li>
+              <li>حفظ آمن لبياناتك على هاتفك وتصدير كشوفات PDF</li>
+              <li>حفظ نسخة احتياطية على هاتفك في اي وقت يمكنك استعدتها</li>
+            </ul>
+          </div>
+          <a href="#order-form" class="plan-btn" onclick="selectCountryPreset('أخرى')">اطلب التفعيل خارج الجزائر</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dedicated Download Section -->
+  <section class="section" id="download">
+    <div class="container">
+      <div class="section-header">
+        <h2> التحميل </h2>
+        
+      </div>
+
+      <div class="download-box">
+        <div class="download-title"> حمّل كرني الآن وابدأ تجربتك المجانية الكاملة لمدة 24 ساعة قبل تفعيل الاشتراك: </div>
+        <div class="store-buttons">
+          <!-- Direct APK Button -->
+          <a href="#" id="apkDownloadBtn" target="_blank" rel="noopener" class="store-btn apk-btn">
+            <svg class="store-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85a.637.637 0 0 0-.83.22l-1.88 3.24a11.463 11.463 0 0 0-8.94 0L5.65 5.67a.643.643 0 0 0-.87-.2c-.28.18-.37.54-.22.83L6.4 9.48A10.78 10.78 0 0 0 1 18h22a10.78 10.78 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/>
+            </svg>
+            <div class="store-text">
+              <small>تحميل مباشر للأندرويد</small>
+              <strong>ملف APK</strong>
+            </div>
+          </a>
+
+          <!-- Google Play Coming Soon -->
+          <button type="button" class="store-btn coming-soon" onclick="showToast('سيتم توفير تطبيق كرني على متجر Google Play قريباً! يمكنك تحميل نسخة APK المباشرة حالياً.')">
+            <span class="soon-tag">قريباً</span>
+            <svg class="store-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3 20.5v-17c0-.83.94-1.3 1.6-.8l14 8.5c.6.37.6 1.23 0 1.6l-14 8.5c-.66.5-1.6.03-1.6-.8z"/>
+            </svg>
+            <div class="store-text">
+              <small>متوفر قريباً على</small>
+              <strong>Google Play</strong>
+            </div>
+          </button>
+
+          <!-- App Store Coming Soon -->
+          <button type="button" class="store-btn coming-soon" onclick="showToast('نسخة الآيفون على App Store ستكون متوفرة قريباً بإذن الله!')">
+            <span class="soon-tag">قريباً</span>
+            <svg class="store-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.96 6.32c.67-.81 1.12-1.94 1-3.07-.96.04-2.13.64-2.82 1.45-.61.7-.115 1.85-1.01 2.96 1.08.08 2.16-.53 2.83-1.34z"/>
+            </svg>
+            <div class="store-text">
+              <small>متوفر قريباً على</small>
+              <strong>App Store</strong>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WhatsApp Order Form -->
+  <section class="section" id="order-form">
+    <div class="container">
+      <div class="section-header">
+        <h2>  فعلي التطبيق الأن </h2>
+        <p>املأ بياناتك التالية وسيتم توجيهك مباشرة إلى الواتساب لإرسال طلبك وتفعيل حسابك بسرعة.</p>
+      </div>
+
+      <div class="form-section-box">
+        <form id="whatsappOrderForm" class="form-grid">
+          <div class="form-group full">
+            <label for="fullName">الاسم واللقب *</label>
+            <input type="text" id="fullName" required placeholder="مثال: غيث صهيب  " />
+          </div>
+
+          <div class="form-group">
+            <label for="country">الدولة *</label>
+            <select id="country" required>
+              <option value="الجزائر" selected>🇩🇿 الجزائر</option>
+              <option value="المغرب">🇲🇦 المغرب</option>
+              <option value="تونس">🇹🇳 تونس</option>
+              <option value="مصر">🇪🇬 مصر</option>
+              <option value="السعودية">🇸🇦 السعودية</option>
+              <option value="الإمارات">🇦🇪 الإمارات</option>
+              <option value="قطر">🇶🇦 قطر</option>
+              <option value="الكويت">🇰🇼 الكويت</option>
+              <option value="الأردن">🇯🇴 الأردن</option>
+              <option value="العراق">🇮🇶 العراق</option>
+              <option value="ليبيا">🇱🇾 ليبيا</option>
+              <option value="موريتانيا">🇲🇷 موريتانيا</option>
+              <option value="فرنسا">🇫🇷 فرنسا</option>
+              <option value="كندا">🇨🇦 كندا</option>
+              <option value="دولة أخرى">🌍 دولة أخرى</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="wilaya" id="wilayaLabel">الولاية *</label>
+            <input type="text" id="wilaya" required placeholder="مثال: الجزائر العاصمة / وهران / سطيف..." />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">رقم الهاتف *</label>
+            <input type="tel" id="phone" required placeholder="مثال: 0550123456" dir="ltr" style="text-align: right;" />
+          </div>
+
+          <div class="form-group">
+            <label for="email">البريد الإلكتروني <span class="opt">(اختياري)</span></label>
+            <input type="email" id="email" placeholder="example@email.com" dir="ltr" style="text-align: right;" />
+          </div>
+
+          <button type="submit" class="wa-submit-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/>
+            </svg>
+            إرسال المعلومات عبر الواتساب
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>جميع الحقوق محفوظة © 2026 <strong> كرني Karni</strong></p>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" aria-label="إغلاق">×</button>
+    <img id="lightboxImg" src="" alt="معاينة مكبرة" />
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // =========================================================================
+    // ⚙️ إعدادات صاحب التطبيق (عدّل هذين السطرين فقط برقمك ورابط ملف APK)
+    // =========================================================================
+    const WHATSAPP_NUMBER = "213671131253"; // ضع رقم الواتساب بصيغة دولية بدون + أو 00 (مثال: 213551234567)
+    const APK_DOWNLOAD_URL = "https://t.me/karni_karni_karni/2"; // رابط التحميل المباشر لملف APK
+    // =========================================================================
+
+    const slides = [
+      {
+        "src": "assets/screenshots/1.jpg",
+        "title": "الشاشة الرئيسية والصرف الآمن اليومي",
+        "desc": "نظرة شاملة على الرصيد الحالي، المصاريف، الديون، السلف، مع حساب الصرف الآمن اليومي المقترح."
+      },
+      {
+        "src": "assets/screenshots/2.jpg",
+        "title": "تسجيل مصروف جديد بسهولة",
+        "desc": "اختر المبلغ والفئة (الضروريات، الفواتير، الصحة، المواصلات...) وحدد مصدر الدفع من الرصيد أو المدخرات."
+      },
+      {
+        "src": "assets/screenshots/3.jpg",
+        "title": "سجل المصاريف والبحث السريع",
+        "desc": "استعرض جميع مصروفاتك وابحث بالعنوان أو الفئة أو فلتر حسب الرصيد والمدخرات."
+      },
+      {
+        "src": "assets/screenshots/4.jpg",
+        "title": "إضافة مدخول إضافي",
+        "desc": "سجّل مصادر الدخل الإضافية ووجّهها مباشرة إلى الرصيد أو إلى الحصالة."
+      },
+      {
+        "src": "assets/screenshots/5.jpg",
+        "title": "الالتزامات الثابتة والأقساط (في الانتظار)",
+        "desc": "يحجز التطبيق مبالغ التزاماتك غير المدفوعة تلقائياً لضمان عدم المساس بها."
+      },
+      {
+        "src": "assets/screenshots/6.jpg",
+        "title": "متابعة الأقساط المدفوعة والمتبقية",
+        "desc": "شريط تقدم واضح يبيّن عدد الأشهر المدفوعة والمتبقية لكل التزام أو قسط."
+      },
+      {
+        "src": "assets/screenshots/7.jpg",
+        "title": "إدارة الديون التي عليك",
+        "desc": "تابع إجمالي ديونك النشطة والمنتهية وسجّل الدفعات الجزئية أو الكلية بضغطة زر."
+      },
+      {
+        "src": "assets/screenshots/8.jpg",
+        "title": "إدارة السلف المستحقة لك",
+        "desc": "سجّل المبالغ التي أقرضتها للآخرين وتابع نسبة استرجاع كل سلفة بدقة."
+      },
+      {
+        "src": "assets/screenshots/9.jpg",
+        "title": "الحصالة وإدارة المدخرات",
+        "desc": "اعزل مدخراتك عن مصاريفك اليومية مع سجل كامل لحركات الإيداع والسحب."
+      },
+      {
+        "src": "assets/screenshots/10.jpg",
+        "title": "الأهداف المالية الذكية",
+        "desc": "حدّد أهدافك المالية وتابع نسبة الإنجاز حتى تحقيق الهدف بالكامل."
+      },
+      {
+        "src": "assets/screenshots/11.jpg",
+        "title": "حاسبة الزكاة الشهرية والمفتوحة",
+        "desc": "خصّص مبلغ زكاة ثابت يُقتطع شهرياً من الراتب أو أخرج زكاة مفتوحة في أي يوم."
+      },
+      {
+        "src": "assets/screenshots/12.jpg",
+        "title": "سجل عمليات الزكاة",
+        "desc": "توثيق منظم لجميع مبالغ الزكاة المخرجة بالتاريخ والملاحظات."
+      },
+      {
+        "src": "assets/screenshots/13.jpg",
+        "title": "تقييم الأداء المالي وتوقع نهاية الشهر",
+        "desc": "تحليل ذكي لمتوسط الصرف اليومي وتوقع الرصيد المتبقي عند نهاية الشهرية."
+      },
+      {
+        "src": "assets/screenshots/14.jpg",
+        "title": "مسار الإنفاق التراكمي",
+        "desc": "مخطط بياني يقارن إنفاقك الفعلي بسقف الميزانية يوماً بيوم."
+      },
+      {
+        "src": "assets/screenshots/15.jpg",
+        "title": "توزيع المصاريف حسب الفئات",
+        "desc": "رسوم دائرية واضحة توضّح نسبة الضروريات والكماليات ومصادر الدخل الإضافي."
+      },
+      {
+        "src": "assets/screenshots/16.jpg",
+        "title": "سجل الشهريات والأرشيف",
+        "desc": "أرشفة تلقائية لكل شهر مع إمكانية استرجاع بيانات أخر شهر في أي وقت."
+      },
+      {
+        "src": "assets/screenshots/17.jpg",
+        "title": "إعدادات البلد والعملة والراتب",
+        "desc": "اختر بلدك وعملتك المحلية ويوم استلام الراتب ليتكيف التطبيق معك تلقائياً."
+      },
+      {
+        "src": "assets/screenshots/18.jpg",
+        "title": "لوحة التحكم في الأقسام والأرشيف",
+        "desc": "وصول سريع لجميع الأهداف والديون والسلف وسجل الشهريات والجولة التعريفية."
+      },
+      {
+        "src": "assets/screenshots/19.jpg",
+        "title": "تصدير كشف حساب PDF والنسخ الاحتياطي",
+        "desc": "صدّر كشف حسابك الشهري بصيغة PDF أو احفظ نسخة احتياطية كاملة بصيغة JSON."
+      },
+      {
+        "src": "assets/screenshots/20.jpg",
+        "title": "دعم 3 لغات (العربية، الفرنسية، الإنجليزية)",
+        "desc": "واجهة متعددة اللغات تناسب جميع المستخدمين داخل الجزائر وخارجها."
+      },
+      {
+        "src": "assets/screenshots/21.jpg",
+        "title": "الأمان وقفل التطبيق برمز PIN",
+        "desc": "احمِ خصوصيتك برمز PIN من 4 أرقام مع تنبيه يومي لتسجيل مصروفاتك."
+      }
+    ];
+
+    let currentIndex = 0;
+    const activeImg = document.getElementById("activeScreenshot");
+    const counterEl = document.getElementById("slideCounter");
+    const titleEl = document.getElementById("slideTitle");
+    const descEl = document.getElementById("slideDesc");
+    const thumbsStrip = document.getElementById("thumbsStrip");
+
+    // إنشاء المصغرات
+    slides.forEach((slide, idx) => {
+      const item = document.createElement("div");
+      item.className = "thumb-item" + (idx === 0 ? " active" : "");
+      item.title = slide.title;
+      item.innerHTML = `<img src="${slide.src}" alt="${slide.title}" loading="lazy" />`;
+      item.addEventListener("click", () => goToSlide(idx));
+      thumbsStrip.appendChild(item);
+    });
+
+    function goToSlide(index) {
+      currentIndex = (index + slides.length) % slides.length;
+      const current = slides[currentIndex];
+      activeImg.src = current.src;
+      counterEl.textContent = `صورة ${currentIndex + 1} من ${slides.length}`;
+      titleEl.textContent = current.title;
+      descEl.textContent = current.desc;
+
+      document.querySelectorAll(".thumb-item").forEach((el, idx) => {
+        el.classList.toggle("active", idx === currentIndex);
+        if (idx === currentIndex) {
+          el.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+        }
+      });
+    }
+
+    document.getElementById("prevSlide").addEventListener("click", () => goToSlide(currentIndex - 1));
+    document.getElementById("nextSlide").addEventListener("click", () => goToSlide(currentIndex + 1));
+
+    // دعم السحب باللمس على الهاتف
+    let touchStartX = 0;
+    const phoneScreen = document.getElementById("phoneScreen");
+    phoneScreen.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    phoneScreen.addEventListener("touchend", (e) => {
+      const diff = e.changedTouches[0].screenX - touchStartX;
+      if (Math.abs(diff) > 40) {
+        goToSlide(diff > 0 ? currentIndex - 1 : currentIndex + 1);
+      }
+    }, { passive: true });
+
+    // تكبير الصورة (Lightbox)
+    phoneScreen.addEventListener("click", () => {
+      document.getElementById("lightboxImg").src = slides[currentIndex].src;
+      document.getElementById("lightbox").classList.add("open");
+    });
+    function closeLightbox() {
+      document.getElementById("lightbox").classList.remove("open");
+    }
+
+    // زر تحميل APK
+    const apkBtn = document.getElementById("apkDownloadBtn");
+    apkBtn.href = APK_DOWNLOAD_URL;
+    apkBtn.addEventListener("click", (e) => {
+      if (!APK_DOWNLOAD_URL || APK_DOWNLOAD_URL === "#") {
+        e.preventDefault();
+        showToast("يرجى إضافة رابط ملف APK في إعدادات الصفحة.");
+      } else {
+        showToast("جاري فتح رابط تحميل تطبيق كرني (APK)... استمتع بفترة 24 ساعة مجانية!");
+      }
+    });
+
+    // تحديث حقل الولاية تلقائياً حسب الدولة المختارة
+    const countrySelect = document.getElementById("country");
+    const wilayaLabel = document.getElementById("wilayaLabel");
+    const wilayaInput = document.getElementById("wilaya");
+
+    function updateRegionUI() {
+      const isAlgeria = countrySelect.value === "الجزائر";
+      if (isAlgeria) {
+        wilayaLabel.textContent = "الولاية *";
+        wilayaInput.placeholder = "مثال: الجزائر العاصمة / وهران / سطيف...";
+      } else {
+        wilayaLabel.textContent = "الولاية / المدينة *";
+        wilayaInput.placeholder = "اكتب اسم مدينتك أو محافظتك";
+      }
+    }
+    countrySelect.addEventListener("change", updateRegionUI);
+
+    function selectCountryPreset(type) {
+      if (type === "الجزائر") {
+        countrySelect.value = "الجزائر";
+      } else if (countrySelect.value === "الجزائر") {
+        countrySelect.value = "المغرب";
+      }
+      updateRegionUI();
+    }
+
+    // إرسال النموذج عبر واتساب
+    document.getElementById("whatsappOrderForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const fullName = document.getElementById("fullName").value.trim();
+      const country = countrySelect.value;
+      const wilaya = wilayaInput.value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const planText = country === "الجزائر" ? "1000 دج (داخل الجزائر)" : "5 دولار (خارج الجزائر)";
+
+      const message =
+`السلام عليكم، أرغب في طلب/تفعيل تطبيق كرني 📱
+━━━━━━━━━━━━━━
+👤 الاسم واللقب: ${fullName}
+🌍 الدولة: ${country}
+📍 الولاية/المدينة: ${wilaya}
+📞 رقم الهاتف: ${phone}
+📧 البريد الإلكتروني: ${email || "غير محدد"}
+💳 الباقة: ${planText} (بعد 24 ساعة تجريبية)
+━━━━━━━━━━━━━━`;
+
+      const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      window.open(waUrl, "_blank");
+    });
+
+    // إشعار Toast
+    let toastTimer;
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 4000);
+    }
+  </script>
+</body>
+</html>
